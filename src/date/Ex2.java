@@ -3,6 +3,8 @@ package date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,9 +38,14 @@ public class Ex2 {
         LocalDate localDate = dateToLocalDate(date);
         System.out.println("Ngay dau tien cua thang: "+localDate.with(TemporalAdjusters.firstDayOfMonth()));
         System.out.println("Ngay cuoi cung cua thang: "+localDate.with(TemporalAdjusters.lastDayOfMonth()));
-        int daystartweek = calendar.getFirstDayOfWeek();
-        System.out.println(daystartweek);
-        System.out.println("Ngay dau tien cua tuan: "+format.format(calendar.getTime()));
+//        LocalDate zdt;
+//        ZonedDateTime firstOfWeek =zdt.with(ChronoField.DAY_OF_WEEK , 1);
+//        ZoneId zoneId;
+//        firstOfWeek = firstOfWeek.toLocalDate ().atStartOfDay ( zoneId );
+//        ZonedDateTime firstOfNextWeek = firstOfWeek.plusWeeks ( 1 );
+
+        calendar.set(7, calendar.getFirstDayOfWeek());
+        System.out.println("Ngay dau tien cua tuan: "+format0.format(calendar.getTime()));
         calendar.add(Calendar.DATE, 100);
         Date datefromcalendar = calendarToDate(calendar);
         String stringDate = format.format(datefromcalendar);
@@ -49,13 +56,11 @@ public class Ex2 {
     public static void main(String[] args)  throws Exception{
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhap ngay dang: yyyy-MM-dd HH:mm:ss");
-
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
         String string = sc.nextLine();
-
         //System.out.println(stringtodate(string, format));
-
-        dayofmonth(string,format);
+        dayofmonth(string,format0);
 
     }
 }
